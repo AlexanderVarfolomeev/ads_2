@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tree", "tree", "{D1ED8978-305E-4CD1-A0B5-3B5AECD8BBFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tree", "tree\Tree\Tree.csproj", "{C294BF78-927E-42F4-896F-2B34D541CF16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeTest", "tree\TreeTest\TreeTest.csproj", "{963A5AC0-7417-4D69-8C14-751C4F6616CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C294BF78-927E-42F4-896F-2B34D541CF16} = {D1ED8978-305E-4CD1-A0B5-3B5AECD8BBFE}
+		{963A5AC0-7417-4D69-8C14-751C4F6616CD} = {D1ED8978-305E-4CD1-A0B5-3B5AECD8BBFE}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C294BF78-927E-42F4-896F-2B34D541CF16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C294BF78-927E-42F4-896F-2B34D541CF16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C294BF78-927E-42F4-896F-2B34D541CF16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C294BF78-927E-42F4-896F-2B34D541CF16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{963A5AC0-7417-4D69-8C14-751C4F6616CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{963A5AC0-7417-4D69-8C14-751C4F6616CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{963A5AC0-7417-4D69-8C14-751C4F6616CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{963A5AC0-7417-4D69-8C14-751C4F6616CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

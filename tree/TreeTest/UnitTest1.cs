@@ -115,6 +115,38 @@ public class Tests
     }
     
     [Test]
+    public void TestSetLevel()
+    {
+        var node1 = new SimpleTreeNode<int>(1, null);
+        var node2 = new SimpleTreeNode<int>(2, null);
+        var node3 = new SimpleTreeNode<int>(3, null);
+        var node4 = new SimpleTreeNode<int>(4, null);
+        var node5 = new SimpleTreeNode<int>(2, null);
+
+        SimpleTree<int> tree = new SimpleTree<int>(node1);
+        tree.AddChild(tree.Root, node2);
+        tree.AddChild(tree.Root, node3);
+        tree.AddChild(node3, node4);
+        tree.AddChild(node4, node5);
+        
+        tree.SetLevels();
+
+        Assert.That(node1.Level, Is.EqualTo(1));
+        Assert.That(node2.Level, Is.EqualTo(2));
+        Assert.That(node3.Level, Is.EqualTo(2));
+        Assert.That(node4.Level, Is.EqualTo(3));
+        Assert.That(node5.Level, Is.EqualTo(4));
+        
+        tree.MoveNode(node3, node2);
+        tree.SetLevels();
+        Assert.That(node1.Level, Is.EqualTo(1));
+        Assert.That(node2.Level, Is.EqualTo(2));
+        Assert.That(node3.Level, Is.EqualTo(3));
+        Assert.That(node4.Level, Is.EqualTo(4));
+        Assert.That(node5.Level, Is.EqualTo(5));
+    }
+    
+    [Test]
     public void TestLeadCount()
     {
         var node1 = new SimpleTreeNode<int>(1, null);

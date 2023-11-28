@@ -105,7 +105,7 @@ namespace AlgorithmsDataStructures2
    
         public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent)
         {
-                var oldParent = OriginalNode.Parent;
+            var oldParent = OriginalNode.Parent;
             oldParent.Children.Remove(OriginalNode);
 
             OriginalNode.Parent = NewParent;
@@ -123,7 +123,6 @@ namespace AlgorithmsDataStructures2
 
         public int LeafCount()
         {
-            // количество листьев в дереве
             return Root is null ? 0 : leafCount(Root);
         }
         

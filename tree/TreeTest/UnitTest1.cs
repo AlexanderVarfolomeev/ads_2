@@ -34,6 +34,28 @@ public class Tests
     }
     
     [Test]
+    public void TestDeleteNodes()
+    {
+        var node1 = new SimpleTreeNode<int>(1, null);
+        var node2 = new SimpleTreeNode<int>(2, null);
+        var node3 = new SimpleTreeNode<int>(3, null);
+        var node4 = new SimpleTreeNode<int>(4, null);
+        var node5 = new SimpleTreeNode<int>(5, null);
+
+        SimpleTree<int> tree = new SimpleTree<int>(node1);
+        tree.AddChild(tree.Root, node2);
+        tree.AddChild(tree.Root, node3);
+        tree.AddChild(node3, node4);
+        tree.AddChild(node4, node5);
+
+        tree.DeleteNode(node3);
+        var list = tree.GetAllNodes();
+        Assert.That(list.Count, Is.EqualTo(2));
+        Assert.Contains(node1, list);
+        Assert.Contains(node2, list);
+    }
+    
+    [Test]
     public void TestMoveNode()
     {
         var node1 = new SimpleTreeNode<int>(1, null);

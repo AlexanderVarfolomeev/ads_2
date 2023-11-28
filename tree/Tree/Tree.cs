@@ -129,7 +129,7 @@ namespace AlgorithmsDataStructures2
         
         public int leafCount(SimpleTreeNode<T> currentNode)
         {
-            if (currentNode.Children is null)
+            if (currentNode.Children is null || currentNode.Children.Count == 0) 
             {
                 return 1;
             }

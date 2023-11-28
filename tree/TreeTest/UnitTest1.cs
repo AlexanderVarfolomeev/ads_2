@@ -169,7 +169,7 @@ public class Tests
     }
     
     [Test]
-    public void TestLeadCount()
+    public void TestLeadCountAfterDelete()
     {
         var node1 = new SimpleTreeNode<int>(1, null);
         var node2 = new SimpleTreeNode<int>(2, null);
@@ -184,6 +184,11 @@ public class Tests
         tree.AddChild(node4, node5);
 
         var count = tree.LeafCount();
+        Assert.That(count, Is.EqualTo(2));
+        
+        tree.DeleteNode(node4);
+        
+        count = tree.LeafCount();
         Assert.That(count, Is.EqualTo(2));
     }
 }

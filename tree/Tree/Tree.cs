@@ -105,15 +105,8 @@ namespace AlgorithmsDataStructures2
    
         public void MoveNode(SimpleTreeNode<T> OriginalNode, SimpleTreeNode<T> NewParent)
         {
-            var oldParent = OriginalNode.Parent;
-            oldParent.Children.Remove(OriginalNode);
-
-            OriginalNode.Parent = NewParent;
-            if (NewParent.Children is null)
-            {
-                NewParent.Children = new List<SimpleTreeNode<T>>();
-            }
-            NewParent.Children.Add(OriginalNode);
+            DeleteNode(OriginalNode);
+            AddChild(NewParent, OriginalNode);
         }
    
         public int Count()

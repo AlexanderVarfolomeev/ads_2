@@ -289,6 +289,30 @@ public class Tests
     }
     
     [Test]
+    public void TestFindMinFromNull()
+    {
+        BSTNode<int> rootNode = new BSTNode<int>(18, 4, null);
+        BST<int> tree = new BST<int>(rootNode);
+        
+        var exist = tree.AddKeyValue(15, 41);
+        Assert.True(exist);
+        exist = tree.AddKeyValue(8, 411);
+        Assert.True(exist);
+        exist =tree.AddKeyValue(12, 11);
+        Assert.True(exist);
+        exist =tree.AddKeyValue(14, 12);
+        Assert.True(exist);
+        exist =tree.AddKeyValue(51, 12);
+        Assert.True(exist);
+        exist =tree.AddKeyValue(41, 12);
+        Assert.True(exist);
+        exist =tree.AddKeyValue(102, 12);
+        Assert.True(exist);
+
+        Assert.Throws<ArgumentException>(() => tree.FinMinMax(null, false));
+    }
+    
+    [Test]
     public void TestDeleteLeaf()
     {
         BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);

@@ -5,11 +5,11 @@ namespace AlgorithmsDataStructures2
 {
     public class BSTNode<T>
     {
-        public int NodeKey; 
-        public T NodeValue; 
-        public BSTNode<T> Parent; 
-        public BSTNode<T> LeftChild; 
-        public BSTNode<T> RightChild; 
+        public int NodeKey; // ключ узла
+        public T NodeValue; // значение в узле
+        public BSTNode<T> Parent; // родитель или null для корня
+        public BSTNode<T> LeftChild; // левый потомок
+        public BSTNode<T> RightChild; // правый потомок	
 	
         public BSTNode(int key, T val, BSTNode<T> parent)
         {
@@ -21,12 +21,16 @@ namespace AlgorithmsDataStructures2
         }
     }
 
+    // промежуточный результат поиска
     public class BSTFind<T>
     {
+        // null если в дереве вообще нету узлов
         public BSTNode<T> Node;
 	
+        // true если узел найден
         public bool NodeHasKey;
 	
+        // true, если родительскому узлу надо добавить новый левым
         public bool ToLeft;
 	
         public BSTFind() { Node = null; }
@@ -34,13 +38,14 @@ namespace AlgorithmsDataStructures2
 
     public class BST<T>
     {
-        BSTNode<T> Root;
+        BSTNode<T> Root; // корень дерева, или null
 	
         public BST(BSTNode<T> node)
         {
             Root = node;
         }
 	
+        // ищем в дереве узел и сопутствующую информацию по ключу
         public BSTFind<T> FindNodeByKey(int key)
         {
             if (Root is null)
@@ -94,6 +99,7 @@ namespace AlgorithmsDataStructures2
             return FindNodeByKey(key, curNode.LeftChild);
         }
         
+        // добавляем ключ-значение в дерево
         public bool AddKeyValue(int key, T val)
         {
             var found = FindNodeByKey(key);
@@ -120,8 +126,14 @@ namespace AlgorithmsDataStructures2
             return true;
         }
 	
+        // ищем максимальный/минимальный ключ в поддереве
         public BSTNode<T> FinMinMax(BSTNode<T> FromNode, bool FindMax)
         {
+            if (FromNode is null)
+            {
+                throw new ArgumentException("incorrect inut data");
+            }
+            
             if (FindMax && FromNode.RightChild is null)
             {
                 return FromNode;
@@ -140,6 +152,7 @@ namespace AlgorithmsDataStructures2
             return FinMinMax(FromNode.LeftChild, FindMax);
         }
 	
+        // удаляем узел по ключу
         public bool DeleteNodeByKey(int key)
         {
             var found = FindNodeByKey(key);
@@ -227,6 +240,7 @@ namespace AlgorithmsDataStructures2
             return false;
         }
 
+        // количество узлов в дереве
         public int Count()
         {
             return Count(Root); 

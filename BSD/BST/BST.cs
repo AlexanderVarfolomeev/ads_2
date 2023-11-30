@@ -206,24 +206,6 @@ namespace AlgorithmsDataStructures2
                 parent.RightChild = null;
             }
         }
-        
-        // public bool DeleteNodeByKey( BSTNode<T> deletedNode, BSTNode<T> curNode)
-        // {
-        //     if (IsLeaf(curNode))
-        //     {
-        //         ReplaceNode(deletedNode, curNode);
-        //     }
-        //
-        //     if (curNode.LeftChild is null)
-        //     {
-        //         ReplaceNode(deletedNode, curNode);
-        //         ReplaceNode(curNode, curNode.RightChild);
-        //     }
-        //     
-        //     return DeleteNodeByKey(deletedNode, curNode.LeftChild); // если узел не найден
-        // }
-
-       
 
         private bool IsLeaf(BSTNode<T> node)
         {
@@ -237,7 +219,17 @@ namespace AlgorithmsDataStructures2
 
         public int Count()
         {
-            return 0; // количество узлов в дереве
+            return Count(Root); 
+        }
+
+        private int Count(BSTNode<T> curNode)
+        {
+            if (curNode is null)
+            {
+                return 0;
+            }
+
+            return Count(curNode.LeftChild) + Count(curNode.RightChild) + 1;
         }
 	
     }

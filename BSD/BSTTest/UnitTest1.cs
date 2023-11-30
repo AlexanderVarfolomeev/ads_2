@@ -340,4 +340,62 @@ public class Tests
         Assert.That(found.Node.RightChild.NodeKey, Is.EqualTo(150));
         Assert.That(found.Node.Parent.NodeKey, Is.EqualTo(20));
     }
+    
+    [Test]
+    public void TestCountInEmptyTree()
+    {
+        BST<int> tree = new BST<int>(null);
+
+        var count = tree.Count();
+        Assert.That(count, Is.EqualTo(0));
+    }
+    
+    [Test]
+    public void TestCountInNonEmptyTree()
+    {
+        BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);
+        BST<int> tree = new BST<int>(rootNode);
+
+        tree.AddKeyValue(10, 0);
+        tree.AddKeyValue(8, 0);
+        tree.AddKeyValue(13, 0);
+        tree.AddKeyValue(11, 0);
+        tree.AddKeyValue(14, 0);
+        tree.AddKeyValue(20, 0);
+        tree.AddKeyValue(18, 0);
+        tree.AddKeyValue(19, 0);
+        tree.AddKeyValue(30, 0);
+        tree.AddKeyValue(25, 0);
+        tree.AddKeyValue(100, 0);
+        tree.AddKeyValue(150, 0);
+        
+        var count = tree.Count();
+        Assert.That(count, Is.EqualTo(13));
+    }
+    
+    [Test]
+    public void TestCountAfterDelete()
+    {
+        BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);
+        BST<int> tree = new BST<int>(rootNode);
+
+        tree.AddKeyValue(10, 0);
+        tree.AddKeyValue(8, 0);
+        tree.AddKeyValue(13, 0);
+        tree.AddKeyValue(11, 0);
+        tree.AddKeyValue(14, 0);
+        tree.AddKeyValue(20, 0);
+        tree.AddKeyValue(18, 0);
+        tree.AddKeyValue(19, 0);
+        tree.AddKeyValue(30, 0);
+        tree.AddKeyValue(25, 0);
+        tree.AddKeyValue(100, 0);
+        tree.AddKeyValue(150, 0);
+
+        tree.DeleteNodeByKey(20);
+        tree.DeleteNodeByKey(15);
+        tree.DeleteNodeByKey(11);
+        var count = tree.Count();
+        Assert.That(count, Is.EqualTo(10));
+    }
 }

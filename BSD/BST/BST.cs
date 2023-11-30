@@ -5,11 +5,11 @@ namespace AlgorithmsDataStructures2
 {
     public class BSTNode<T>
     {
-        public int NodeKey; // ключ узла
-        public T NodeValue; // значение в узле
-        public BSTNode<T> Parent; // родитель или null для корня
-        public BSTNode<T> LeftChild; // левый потомок
-        public BSTNode<T> RightChild; // правый потомок	
+        public int NodeKey; 
+        public T NodeValue; 
+        public BSTNode<T> Parent; 
+        public BSTNode<T> LeftChild; 
+        public BSTNode<T> RightChild; 
 	
         public BSTNode(int key, T val, BSTNode<T> parent)
         {
@@ -21,16 +21,12 @@ namespace AlgorithmsDataStructures2
         }
     }
 
-    // промежуточный результат поиска
     public class BSTFind<T>
     {
-        // null если в дереве вообще нету узлов
         public BSTNode<T> Node;
 	
-        // true если узел найден
         public bool NodeHasKey;
 	
-        // true, если родительскому узлу надо добавить новый левым
         public bool ToLeft;
 	
         public BSTFind() { Node = null; }
@@ -38,7 +34,7 @@ namespace AlgorithmsDataStructures2
 
     public class BST<T>
     {
-        BSTNode<T> Root; // корень дерева, или null
+        BSTNode<T> Root;
 	
         public BST(BSTNode<T> node)
         {

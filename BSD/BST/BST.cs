@@ -155,7 +155,21 @@ namespace AlgorithmsDataStructures2
 
             if (found.NodeHasKey && found.Node.RightChild is null)
             {
-                found.Node = found.Node.LeftChild;
+                if (found.Node.Parent is null)
+                {
+                    Root = found.Node;
+                }
+                
+                if (found.Node.Parent.LeftChild == found.Node)
+                {
+                    found.Node.Parent.LeftChild = found.Node.LeftChild;
+                }
+
+                if (found.Node.Parent.RightChild == found.Node)
+                {
+                    found.Node.Parent.RightChild = found.Node.LeftChild;
+                }
+                
                 return true; 
             }
             

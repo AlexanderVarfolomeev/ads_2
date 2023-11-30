@@ -79,6 +79,24 @@ public class Tests
     }
     
     [Test]
+    public void TestFindInEmptyTree()
+    {
+        BST<int> tree = new BST<int>(null);
+
+        var find1 =  tree.FindNodeByKey(20);
+        var find2 =  tree.FindNodeByKey(1);
+        var find3 =  tree.FindNodeByKey(6);
+        
+        Assert.False(find1.NodeHasKey);
+        Assert.False(find2.NodeHasKey);
+        Assert.False(find3.NodeHasKey);
+        
+        Assert.Null(find1.Node);
+        Assert.Null(find2.Node);
+        Assert.Null(find3.Node);
+    }
+    
+    [Test]
     public void TestAddNode()
     {
         BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);
@@ -126,7 +144,31 @@ public class Tests
         Assert.True(exist);
 
         exist = tree.AddKeyValue(7, 11);
-        Assert.False(exist);}
+        Assert.False(exist);
+    }
+    
+    [Test]
+    public void TestAddNodeAfterDelete()
+    {
+        BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);
+        BST<int> tree = new BST<int>(rootNode);
+        
+        var exist = tree.AddKeyValue(18, 41);
+        Assert.True(exist);
+        exist = tree.AddKeyValue(8, 411);
+        Assert.True(exist);
+        exist =tree.AddKeyValue(7, 11);
+        Assert.True(exist);
+        exist =tree.AddKeyValue(5, 12);
+        Assert.True(exist);
+
+        tree.DeleteNodeByKey(8);
+
+        exist = tree.AddKeyValue(8, 0);
+        Assert.True(exist);
+        
+        Assert.That(rootNode.LeftChild.RightChild.NodeKey, Is.EqualTo(8));
+    }
     
     [Test]
     public void TestFindMaxFromRoot()

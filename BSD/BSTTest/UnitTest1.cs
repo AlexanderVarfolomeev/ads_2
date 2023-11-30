@@ -34,16 +34,16 @@ public class Tests
        Assert.True(find1.NodeHasKey);
        Assert.Null(find1.Node.LeftChild);
        Assert.Null(find1.Node.RightChild);
-       Assert.Equals(find1.Node.Parent.NodeKey, 5);
+       Assert.That(find1.Node.Parent.NodeKey, Is.EqualTo(5));
        
        Assert.True(find2.NodeHasKey);
        Assert.Null(find2.Node.LeftChild);
        Assert.Null(find2.Node.RightChild);
-       Assert.Equals(find2.Node.Parent.NodeKey, 8);
+       Assert.That(find2.Node.Parent.NodeKey, Is.EqualTo(8));
        
        Assert.True(findRoot.NodeHasKey);
-       Assert.Equals(find2.Node.RightChild.NodeKey, 15);
-       Assert.Equals(find2.Node.LeftChild.NodeKey, 8);
+       Assert.That(findRoot.Node.RightChild.NodeKey, Is.EqualTo(15));
+       Assert.That(findRoot.Node.LeftChild.NodeKey, Is.EqualTo(8));
     }
     
     [Test]
@@ -69,9 +69,9 @@ public class Tests
         Assert.False(find2.NodeHasKey);
         Assert.False(find3.NodeHasKey);
 
-        Assert.Equals(find1.Node.NodeKey, 15);
-        Assert.Equals(find2.Node.NodeKey, 5);
-        Assert.Equals(find3.Node.NodeKey, 7);
+        Assert.That(find1.Node.NodeKey, Is.EqualTo(15));
+        Assert.That(find2.Node.NodeKey, Is.EqualTo(5));
+        Assert.That(find3.Node.NodeKey, Is.EqualTo(5));
         
         Assert.False(find1.ToLeft);
         Assert.True(find2.ToLeft);
@@ -87,27 +87,27 @@ public class Tests
         Assert.Null(rootNode.LeftChild);
         tree.AddKeyValue(10, 10);
         Assert.NotNull(rootNode.LeftChild);
-        Assert.Equals(rootNode.LeftChild.NodeKey, 10);
+        Assert.That(rootNode.LeftChild.NodeKey, Is.EqualTo(10));
         
         Assert.Null(rootNode.RightChild);
         tree.AddKeyValue(20, 20);
         Assert.NotNull(rootNode.RightChild);
-        Assert.Equals(rootNode.RightChild.NodeKey, 20);
+        Assert.That(rootNode.RightChild.NodeKey, Is.EqualTo(20));
         
         Assert.Null(rootNode.LeftChild.LeftChild);
         tree.AddKeyValue(8, 8);
         Assert.NotNull(rootNode.LeftChild.LeftChild);
-        Assert.Equals(rootNode.LeftChild.LeftChild.NodeKey, 8);
+        Assert.That(rootNode.LeftChild.LeftChild.NodeKey, Is.EqualTo(8));
         
         Assert.Null(rootNode.RightChild.LeftChild);
         tree.AddKeyValue(17, 17);
         Assert.NotNull(rootNode.RightChild.LeftChild);
-        Assert.Equals(rootNode.RightChild.LeftChild.NodeKey, 17);
+        Assert.That(rootNode.RightChild.LeftChild.NodeKey, Is.EqualTo(17));
         
         Assert.Null(rootNode.LeftChild.RightChild);
         tree.AddKeyValue(12, 12);
         Assert.NotNull(rootNode.LeftChild.RightChild);
-        Assert.Equals(rootNode.LeftChild.RightChild.NodeKey, 12);
+        Assert.That(rootNode.LeftChild.RightChild.NodeKey, Is.EqualTo(12));
     }
     
     [Test]
@@ -233,6 +233,36 @@ public class Tests
     }
     
     [Test]
+    public void TestDeleteLeaf()
+    {
+        BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);
+        BST<int> tree = new BST<int>(rootNode);
+
+        tree.AddKeyValue(10, 0);
+        tree.AddKeyValue(8, 0);
+        tree.AddKeyValue(13, 0);
+        tree.AddKeyValue(11, 0);
+        tree.AddKeyValue(14, 0);
+        tree.AddKeyValue(20, 0);
+        tree.AddKeyValue(18, 0);
+        tree.AddKeyValue(19, 0);
+        tree.AddKeyValue(30, 0);
+        tree.AddKeyValue(25, 0);
+        tree.AddKeyValue(100, 0);
+        tree.AddKeyValue(150, 0);
+
+        var deleted = tree.DeleteNodeByKey(150);
+        Assert.True(deleted);
+
+        var found = tree.FindNodeByKey(150);
+        Assert.False(found.NodeHasKey);
+        Assert.That(found.Node.NodeKey, Is.EqualTo(100));
+        
+        found = tree.FindNodeByKey(100);
+        Assert.Null(found.Node.RightChild);
+    }
+    
+    [Test]
     public void TestDeleteRoot()
     {
         BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);
@@ -302,12 +332,12 @@ public class Tests
 
         var found = tree.FindNodeByKey(30);
         Assert.False(found.NodeHasKey);
-        Assert.Equals(found.Node.NodeKey, 25);
+        Assert.That(found.Node.NodeKey, Is.EqualTo(25));
 
         found = tree.FindNodeByKey(100);
         Assert.True(found.NodeHasKey);
-        Assert.Equals(found.Node.LeftChild.NodeKey, 25);
-        Assert.Equals(found.Node.RightChild.NodeKey, 150);
-        Assert.Equals(found.Node.Parent.NodeKey, 20);
+        Assert.That(found.Node.LeftChild.NodeKey, Is.EqualTo(25));
+        Assert.That(found.Node.RightChild.NodeKey, Is.EqualTo(150));
+        Assert.That(found.Node.Parent.NodeKey, Is.EqualTo(20));
     }
 }

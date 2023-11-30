@@ -129,6 +129,20 @@ public class Tests
     }
     
     [Test]
+    public void TestAddNodeInEmptyTree()
+    {
+        BST<int> tree = new BST<int>(null);
+        var added = tree.AddKeyValue(10, 10);
+        Assert.True(added);
+        var found = tree.FindNodeByKey(10);
+        
+        Assert.True(found.NodeHasKey);
+        Assert.Null(found.Node.Parent);
+        Assert.Null(found.Node.RightChild);
+        Assert.Null(found.Node.LeftChild);
+    }
+    
+    [Test]
     public void TestAddNodeExist()
     {
         BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);

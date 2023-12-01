@@ -363,6 +363,19 @@ public class Tests
         found = tree.FindNodeByKey(20);
         Assert.Null(found.Node.LeftChild);
     }
+    
+    [Test]
+    public void TestDeleteOnlyRoot()
+    {
+        BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);
+        BST<int> tree = new BST<int>(rootNode);
+        var deleted = tree.DeleteNodeByKey(15);
+        Assert.True(deleted);
+
+        var found = tree.FindNodeByKey(15);
+        Assert.False(found.NodeHasKey);
+        
+    }
 
     [Test]
     public void TestDeleteInRightSubTree()
@@ -395,6 +408,61 @@ public class Tests
         Assert.That(found.Node.LeftChild.NodeKey, Is.EqualTo(25));
         Assert.That(found.Node.RightChild.NodeKey, Is.EqualTo(150));
         Assert.That(found.Node.Parent.NodeKey, Is.EqualTo(20));
+    }
+    
+    [Test]
+    public void TestDeleteAll()
+    {
+        BSTNode<int> rootNode = new BSTNode<int>(50, 4, null);
+        BST<int> tree = new BST<int>(rootNode);
+
+        tree.AddKeyValue(30, 0);
+        tree.AddKeyValue(70, 0);
+        tree.AddKeyValue(20, 0);
+        tree.AddKeyValue(40, 0);
+        tree.AddKeyValue(60, 0);
+        tree.AddKeyValue(80, 0);
+
+         tree.DeleteNodeByKey(20);
+         var node = tree.FindNodeByKey(20);
+         Assert.False(node.NodeHasKey);
+         Assert.True(node.ToLeft);
+         Assert.That(node.Node.NodeKey, Is.EqualTo(30));
+         
+         tree.DeleteNodeByKey(30);
+         node = tree.FindNodeByKey(30);
+         Assert.False(node.NodeHasKey);
+         Assert.True(node.ToLeft);
+         Assert.That(node.Node.NodeKey, Is.EqualTo(40));
+         
+         tree.DeleteNodeByKey(50);
+         node = tree.FindNodeByKey(50);
+         Assert.False(node.NodeHasKey);
+         Assert.False(node.ToLeft);
+         Assert.That(node.Node.NodeKey, Is.EqualTo(40));
+         
+         tree.DeleteNodeByKey(60);
+         node = tree.FindNodeByKey(60);
+         Assert.False(node.NodeHasKey);
+         Assert.False(node.ToLeft);
+         Assert.That(node.Node.NodeKey, Is.EqualTo(40));
+         
+         tree.DeleteNodeByKey(80);
+         node = tree.FindNodeByKey(80);
+         Assert.False(node.NodeHasKey);
+         Assert.False(node.ToLeft);
+         Assert.That(node.Node.NodeKey, Is.EqualTo(70));
+         
+         tree.DeleteNodeByKey(70);
+         node = tree.FindNodeByKey(70);
+         Assert.False(node.NodeHasKey);
+         Assert.False(node.ToLeft);
+         Assert.That(node.Node.NodeKey, Is.EqualTo(40));
+         
+         tree.DeleteNodeByKey(40);
+         node = tree.FindNodeByKey(40);
+         Assert.False(node.NodeHasKey);
+         Assert.Null(node.Node);
     }
     
     [Test]
@@ -454,4 +522,5 @@ public class Tests
         var count = tree.Count();
         Assert.That(count, Is.EqualTo(10));
     }
+    
 }

@@ -142,7 +142,7 @@ namespace AlgorithmsDataStructures2
 	
         public bool DeleteNodeByKey(int key)
         {
-            var found = FindNodeByKey(key);
+            var found = FindNodeByKey(key); 
             if (found.NodeHasKey && IsLeaf(found.Node))
             {
                 RemoveLeaf(found.Node);
@@ -153,12 +153,15 @@ namespace AlgorithmsDataStructures2
             {
                 if (found.Node.Parent is null)
                 {
-                    Root = found.Node;
+                    Root = found.Node.LeftChild;
+                    Root.Parent = null;
+                    return true; 
                 }
                 
                 if (found.Node.Parent.LeftChild == found.Node)
                 {
                     found.Node.Parent.LeftChild = found.Node.LeftChild;
+                    return true; 
                 }
 
                 if (found.Node.Parent.RightChild == found.Node)
@@ -204,6 +207,7 @@ namespace AlgorithmsDataStructures2
             if (parent is null)
             {
                 Root = null;
+                return;
             }
 
             if (parent.LeftChild == node)

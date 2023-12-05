@@ -523,4 +523,119 @@ public class Tests
         Assert.That(count, Is.EqualTo(10));
     }
     
+    [Test]
+    public void TestWideAllNodes()
+    {
+        BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);
+        BST<int> tree = new BST<int>(rootNode);
+
+        tree.AddKeyValue(10, 0);
+        tree.AddKeyValue(8, 0);
+        tree.AddKeyValue(13, 0);
+        tree.AddKeyValue(11, 0);
+        tree.AddKeyValue(14, 0);
+        tree.AddKeyValue(20, 0);
+        tree.AddKeyValue(18, 0);
+        tree.AddKeyValue(19, 0);
+        tree.AddKeyValue(30, 0);
+        tree.AddKeyValue(25, 0);
+        tree.AddKeyValue(100, 0);
+        tree.AddKeyValue(150, 0);
+
+        var expected = new List<int>(){15, 10, 20, 8, 13, 18, 30, 11, 14, 19, 25, 100, 150};
+
+        List<BSTNode> res = tree.WideAllNodes();
+
+        for (int i = 0; i < res.Count; i++)
+        {
+            Assert.That(expected[i], Is.EqualTo(res[i].NodeKey));
+        }
+    }
+    
+    [Test]
+    public void TestInOrder()
+    {
+        BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);
+        BST<int> tree = new BST<int>(rootNode);
+
+        tree.AddKeyValue(10, 0);
+        tree.AddKeyValue(8, 0);
+        tree.AddKeyValue(13, 0);
+        tree.AddKeyValue(11, 0);
+        tree.AddKeyValue(14, 0);
+        tree.AddKeyValue(20, 0);
+        tree.AddKeyValue(18, 0);
+        tree.AddKeyValue(19, 0);
+        tree.AddKeyValue(30, 0);
+        tree.AddKeyValue(25, 0);
+        tree.AddKeyValue(100, 0);
+        tree.AddKeyValue(150, 0);
+
+        var expected = new List<int>(){8, 10, 11, 13, 14, 15, 18, 19, 20, 25, 30, 100, 150};
+
+        List<BSTNode> res = tree.DeepAllNodes(0);
+
+        for (int i = 0; i < res.Count; i++)
+        {
+            Assert.That(expected[i], Is.EqualTo(res[i].NodeKey));
+        }
+    }
+    
+    [Test]
+    public void TestPostOrder()
+    {
+        BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);
+        BST<int> tree = new BST<int>(rootNode);
+
+        tree.AddKeyValue(10, 0);
+        tree.AddKeyValue(8, 0);
+        tree.AddKeyValue(13, 0);
+        tree.AddKeyValue(11, 0);
+        tree.AddKeyValue(14, 0);
+        tree.AddKeyValue(20, 0);
+        tree.AddKeyValue(18, 0);
+        tree.AddKeyValue(19, 0);
+        tree.AddKeyValue(30, 0);
+        tree.AddKeyValue(25, 0);
+        tree.AddKeyValue(100, 0);
+        tree.AddKeyValue(150, 0);
+
+        var expected = new List<int>(){8, 11, 14, 13, 10, 19, 18, 25, 150, 100, 30, 20, 15};
+
+        List<BSTNode> res = tree.DeepAllNodes(1);
+
+        for (int i = 0; i < res.Count; i++)
+        {
+            Assert.That(expected[i], Is.EqualTo(res[i].NodeKey));
+        }
+    }
+    
+    [Test]
+    public void TestPreOrder()
+    {
+        BSTNode<int> rootNode = new BSTNode<int>(15, 4, null);
+        BST<int> tree = new BST<int>(rootNode);
+
+        tree.AddKeyValue(10, 0);
+        tree.AddKeyValue(8, 0);
+        tree.AddKeyValue(13, 0);
+        tree.AddKeyValue(11, 0);
+        tree.AddKeyValue(14, 0);
+        tree.AddKeyValue(20, 0);
+        tree.AddKeyValue(18, 0);
+        tree.AddKeyValue(19, 0);
+        tree.AddKeyValue(30, 0);
+        tree.AddKeyValue(25, 0);
+        tree.AddKeyValue(100, 0);
+        tree.AddKeyValue(150, 0);
+
+        var expected = new List<int>(){15, 10, 8, 13, 11, 14, 20, 18, 19, 30, 25, 100, 150};
+
+        List<BSTNode> res = tree.DeepAllNodes(2);
+
+        for (int i = 0; i < res.Count; i++)
+        {
+            Assert.That(expected[i], Is.EqualTo(res[i].NodeKey));
+        }
+    }
 }

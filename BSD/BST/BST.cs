@@ -1,11 +1,16 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
-    public class BSTNode<T>
+    public abstract class BSTNode
     {
         public int NodeKey; 
+    }
+    
+    public class BSTNode<T> : BSTNode
+    {
         public T NodeValue; 
         public BSTNode<T> Parent; 
         public BSTNode<T> LeftChild; 
@@ -245,6 +250,90 @@ namespace AlgorithmsDataStructures2
 
             return Count(curNode.LeftChild) + Count(curNode.RightChild) + 1;
         }
-	
+        
+     
+        
+        public List<BSTNode> WideAllNodes()
+        {
+            List<BSTNode> list = new List<BSTNode>();
+            if (Root is null)
+            {
+                return list;
+            }
+
+            BSTNode<T> current = Root;
+            Queue<BSTNode<T>> q = new Queue<BSTNode<T>>();
+            q.Enqueue(current);
+            while (q.Count != 0)
+            {
+                current = q.Dequeue();
+                list.Add(current);
+                if (current.LeftChild != null)
+                {
+                    q.Enqueue(current.LeftChild);
+                }
+
+                if (current.RightChild != null)
+                {
+                    q.Enqueue(current.RightChild);
+                }
+            }
+
+            return list;
+        }
+
+        public List<BSTNode> DeepAllNodes(int order)
+        {
+            List<BSTNode> res = new List<BSTNode>();
+            switch (order)
+            {
+                case 0:
+                    InOrder(Root, res);
+                    break;
+                case 1:
+                    PostOrder(Root, res);
+                    break;
+                case 2:
+                    PreOrder(Root, res);
+                    break;
+            }
+
+            return res;
+        }
+
+        private void InOrder(BSTNode<T> node, List<BSTNode> res)
+        {
+            if (node is null)
+            {
+                return;
+            }
+
+            InOrder(node.LeftChild, res);
+            res.Add(node);
+            InOrder(node.RightChild, res);
+        }
+        
+        private void PostOrder(BSTNode<T> node, List<BSTNode> res)
+        {
+            if (node is null)
+            {
+                return;
+            }
+
+            PostOrder(node.LeftChild, res);
+            PostOrder(node.RightChild, res);
+            res.Add(node);
+        }
+        
+        private void PreOrder(BSTNode<T> node, List<BSTNode> res)
+        {
+            if (node is null)
+            {
+                return;
+            }
+            res.Add(node);
+            PreOrder(node.LeftChild, res);
+            PreOrder(node.RightChild, res);
+        }
     }
 }

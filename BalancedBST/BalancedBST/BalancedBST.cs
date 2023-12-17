@@ -5,11 +5,11 @@ namespace AlgorithmsDataStructures2
 {
     public class BSTNode
     {
-        public int NodeKey; // ключ узла
-        public BSTNode Parent; // родитель или null для корня
-        public BSTNode LeftChild; // левый потомок
-        public BSTNode RightChild; // правый потомок	
-        public int     Level; // глубина узла
+        public int NodeKey; 
+        public BSTNode Parent; 
+        public BSTNode LeftChild;
+        public BSTNode RightChild; 
+        public int     Level; 
 	
         public BSTNode(int key, BSTNode parent)
         {
@@ -23,7 +23,7 @@ namespace AlgorithmsDataStructures2
 
     public class BalancedBST
     {
-        public BSTNode Root; // корень дерева
+        public BSTNode Root;
 	
         public BalancedBST() 
         { 

@@ -28,11 +28,12 @@ namespace AlgorithmsDataStructures2
         public void AddVertex(int value)
         {
             Vertex v = new Vertex(value);
-            for (int i = 0; i < vertex.Length; i++)
+            for (int i = 0; i < max_vertex; i++)
             {
                 if (vertex[i] is null)
                 {
                     vertex[i] = v;
+                    return;
                 }
             }
         }

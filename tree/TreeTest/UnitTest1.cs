@@ -34,6 +34,33 @@ public class Tests
     }
     
     [Test]
+    public void TestEvenTrees()
+    {
+        var node1 = new SimpleTreeNode<int>(1, null);
+        var node2 = new SimpleTreeNode<int>(2, node1);
+        var node3 = new SimpleTreeNode<int>(3, node1);
+        var node4 = new SimpleTreeNode<int>(4, node3);
+        var node5 = new SimpleTreeNode<int>(5, node2);
+        var node6 = new SimpleTreeNode<int>(6, node1);
+        var node7 = new SimpleTreeNode<int>(7,  node2);
+        var node8 = new SimpleTreeNode<int>(8, node6);
+        var node9 = new SimpleTreeNode<int>(9, node8);
+        var node10 = new SimpleTreeNode<int>(10, node8);
+
+        SimpleTree<int> tree = new SimpleTree<int>(node1);
+        tree.AddChild(node1, node2);
+        tree.AddChild(node1, node3);
+        tree.AddChild(node3, node4);
+        tree.AddChild(node2, node5);
+        tree.AddChild(node1, node6);
+        tree.AddChild(node2, node7);
+        tree.AddChild(node6, node8);
+        tree.AddChild(node8, node9);
+        tree.AddChild(node8, node10);
+        var l = tree.EvenTrees();
+    }
+    
+    [Test]
     public void TestDeleteNodes()
     {
         var node1 = new SimpleTreeNode<int>(1, null);

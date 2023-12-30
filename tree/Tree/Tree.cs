@@ -25,6 +25,39 @@ namespace AlgorithmsDataStructures2
         {
             Root = root;
         }
+        
+        public List<T> EvenTrees()
+        {
+            List<T> res = new List<T>();
+            EvenTrees(Root, ref res);
+
+            return res;
+        }
+
+        private int EvenTrees(SimpleTreeNode<T> node, ref List<T> list)
+        {
+            int count = 0;
+
+            if (node.Children is null)
+            {
+                return 1;
+            }
+            
+            foreach (var child in node.Children)
+            {
+                int subtreeCount = EvenTrees(child,ref  list);
+                if (subtreeCount % 2 == 0)
+                {
+                    list.Add(node.NodeValue);
+                    list.Add(child.NodeValue);
+                    continue;
+                }
+
+                count += subtreeCount;
+            }
+
+            return count + 1;
+        }
 	
         public void AddChild(SimpleTreeNode<T> ParentNode, SimpleTreeNode<T> NewChild)
         {

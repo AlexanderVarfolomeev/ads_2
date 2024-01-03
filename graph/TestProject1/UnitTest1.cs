@@ -12,7 +12,7 @@ public class Tests
     [Test]
     public void AddNewVertex()
     {
-        SimpleGraph g = new SimpleGraph(5);
+        var g = new SimpleGraph<int>(5);
         g.AddVertex(1);
         Assert.NotNull(g.vertex[0]);
     }
@@ -20,7 +20,7 @@ public class Tests
     [Test]
     public void AddNewEdge()
     {
-        SimpleGraph g = new SimpleGraph(5);
+        var g = new SimpleGraph<int>(5);
         g.AddVertex(1);
         g.AddVertex(2);
         
@@ -38,7 +38,7 @@ public class Tests
     [Test]
     public void DeleteVertex()
     {
-        SimpleGraph g = new SimpleGraph(5);
+        var g = new SimpleGraph<int>(5);
         g.AddVertex(1);
         g.AddVertex(2);
         
@@ -51,5 +51,54 @@ public class Tests
         Assert.False(g.IsEdge(1,0));
         Assert.False(g.IsEdge(0,1));
         
+    }
+    
+    [Test]
+    public void TestDepthFirstSearch_PathExists()
+    {
+        // Arrange
+        var graph = new SimpleGraph<int>(5);
+        graph.AddVertex(0); // Add vertices
+        graph.AddVertex(1);
+        graph.AddVertex(2);
+        graph.AddVertex(3);
+        graph.AddVertex(4);
+
+        graph.AddEdge(0, 1); // Add edges
+        graph.AddEdge(1, 2);
+        graph.AddEdge(2, 3);
+        graph.AddEdge(3, 4);
+
+        // Act
+        var result = graph.DepthFirstSearch(0, 4);
+
+        // Assert
+        var expectedPath = new List<int> { 0, 1, 2, 3, 4 };
+        Assert.That(result.Count, Is.EqualTo(expectedPath.Count));
+        for (int i = 0; i < expectedPath.Count; i++)
+        {
+            Assert.That(result[i].Value, Is.EqualTo(expectedPath[i]));
+        }
+    }
+
+    [Test]
+    public void TestDepthFirstSearch_NoPathExists()
+    {
+        // Arrange
+        var graph = new SimpleGraph<int>(5);
+        graph.AddVertex(0); // Add vertices
+        graph.AddVertex(1);
+        graph.AddVertex(2);
+        graph.AddVertex(3);
+        graph.AddVertex(4);
+
+        graph.AddEdge(0, 1); // Add edges
+        graph.AddEdge(1, 2);
+
+        // Act
+        var result = graph.DepthFirstSearch(0, 4);
+
+        // Assert
+        Assert.IsEmpty(result);
     }
 }

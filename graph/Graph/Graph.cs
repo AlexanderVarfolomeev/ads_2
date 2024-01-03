@@ -3,18 +3,20 @@ using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
-    public class Vertex
+    public class Vertex<T>
     {
-        public int Value;
-        public Vertex(int val)
+        public bool Hit;
+        public T Value;
+        public Vertex(T val)
         {
             Value = val;
+            Hit = false;
         }
     }
   
-    public class SimpleGraph
+    public class SimpleGraph<T>
     {
-        public Vertex [] vertex;
+        public Vertex<T> [] vertex;
         public int [,] m_adjacency;
         public int max_vertex;
 
@@ -22,12 +24,12 @@ namespace AlgorithmsDataStructures2
         {
             max_vertex = size;
             m_adjacency = new int [size,size];
-            vertex = new Vertex [size];
+            vertex = new Vertex<T> [size];
         }
 	
-        public void AddVertex(int value)
+        public void AddVertex(T value)
         {
-            Vertex v = new Vertex(value);
+            Vertex<T> v = new Vertex<T>(value);
             for (int i = 0; i < max_vertex; i++)
             {
                 if (vertex[i] is null)
@@ -63,6 +65,60 @@ namespace AlgorithmsDataStructures2
         {
             m_adjacency[v1, v2] = 0;
             m_adjacency[v2, v1] = 0;
+        }
+        
+        public List<Vertex<T>> DepthFirstSearch(int VFrom, int VTo)
+        {
+            Stack<int> stack = new Stack<int>();
+            foreach (var val in vertex)
+            {
+                val.Hit = false;
+            }
+            
+            stack.Push(VFrom);
+            var current = VFrom;
+            while (stack.Count != 0)
+            {
+                current = stack.Peek();
+                vertex[current].Hit = true;
+
+                bool foundAdj = false;
+                for (int i = 0; i < max_vertex; i++)
+                {
+                    if (m_adjacency[current, i] == 0 || vertex[i].Hit) continue;
+
+                    foundAdj = true;
+                    stack.Push(i);
+
+                    if (i == VTo)
+                    {
+                        return StackToList(stack);
+                    }
+                }
+
+                if (!foundAdj)
+                {
+                    stack.Pop();
+                }
+            }
+
+            return StackToList(stack);
+        }
+
+      
+
+        private List<Vertex<T>> StackToList(Stack<int> stack)
+        {
+            List<Vertex<T>> res = new List<Vertex<T>>();
+
+            foreach (var i in stack)
+            {
+                res.Add(vertex[i]);
+            }
+
+            res.Reverse();
+
+            return res;
         }
     }
 }

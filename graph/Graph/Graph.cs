@@ -94,6 +94,7 @@ namespace AlgorithmsDataStructures2
                     {
                         return StackToList(stack);
                     }
+                    break;
                 }
 
                 if (!foundAdj)

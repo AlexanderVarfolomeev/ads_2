@@ -106,7 +106,56 @@ namespace AlgorithmsDataStructures2
             return StackToList(stack);
         }
 
-      
+        public List<Vertex<T>> BreadthFirstSearch(int VFrom, int VTo)
+        {
+            Queue<int> queue = new Queue<int>();
+            List<int> path = new List<int>();
+            foreach (var val in vertex)
+            {
+                val.Hit = false;
+                path.Add(-1);
+            }
+
+            
+            path.Add(VFrom);
+            queue.Enqueue(VFrom);
+            var current = VFrom;
+            
+            while (queue.Count != 0)
+            {
+                current = queue.Dequeue();
+                vertex[current].Hit = true;
+
+                for (int i = 0; i < max_vertex; i++)
+                {
+                    if (m_adjacency[current, i] == 0 || vertex[i].Hit) continue;
+
+                    vertex[i].Hit = true;
+                    queue.Enqueue(i);
+                    path[i] = current;
+
+                    if (i == VTo)
+                    {
+                        return PathToList(path, VTo);
+                    }
+                }
+            }
+
+            return new List<Vertex<T>>();
+        }
+
+        private List<Vertex<T>> PathToList(List<int> path, int VTo)
+        {
+            List<Vertex<T>> res = new List<Vertex<T>>();
+            for (int v = VTo; v != -1; v = path[v])
+            {
+                res.Add(vertex[v]);
+            }
+
+            res.Reverse();
+            return res;
+        }
+
 
         private List<Vertex<T>> StackToList(Stack<int> stack)
         {

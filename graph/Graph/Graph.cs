@@ -212,7 +212,7 @@ namespace AlgorithmsDataStructures2
         {
             for (int k = 0; k < max_vertex; k++)
             {
-                if (m_adjacency[secondVertex, k] == 1 && secondVertex != k && firstVertex != k)
+                if (m_adjacency[secondVertex, k] == 1 && m_adjacency[firstVertex, k] == 1 && secondVertex != k && firstVertex != k)
                 {
                     strongVertices.Add(firstVertex);
                     strongVertices.Add(secondVertex);

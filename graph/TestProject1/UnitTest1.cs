@@ -201,4 +201,31 @@ public class Tests
                 $"There should be an edge between vertex {result[i].Value} and vertex {result[i + 1].Value}");
         }
     }
+    [Test]
+    public void WeakVertices_ReturnsCorrectWeakVertices()
+    {
+        // Initialize graph with 9 vertices
+        var graph = new SimpleGraph<int>(9);
+        for (int i = 0; i < 9; i++) graph.AddVertex(i);
+
+        // Adding edges based on the graph structure from the image
+        graph.AddEdge(0, 1);
+        graph.AddEdge(0, 2);
+        graph.AddEdge(0, 3);
+        graph.AddEdge(2, 3);
+        graph.AddEdge(2, 4);
+        graph.AddEdge(3, 4);
+        graph.AddEdge(3, 5);
+        graph.AddEdge(1, 5);
+        graph.AddEdge(5, 6);
+        graph.AddEdge(5, 7);
+        graph.AddEdge(6, 7);
+        graph.AddEdge(7, 8);
+
+        var weakVertices = graph.WeakVertices();
+
+        Assert.That(weakVertices.Count, Is.EqualTo(2));
+        Assert.IsTrue(weakVertices.Exists(v => v.Value.Equals(1)));
+        Assert.IsTrue(weakVertices.Exists(v => v.Value.Equals(8)));
+    }
 }
